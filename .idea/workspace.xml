@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="328e3da5-ad0d-4ebc-9a87-1c45e3e052ac" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/DuelBeginArenaEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/DuelEndArenaEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/PlayerAcceptInviteArenaEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/PlayerDenyInviteArenaEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/PlayerInviteArenaEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/PlayerJoinArenaEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/PlayerJoinArenaEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/PlayerLeaveArenaEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/PlayerLeaveArenaEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/brunobelloni/Event.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/brunobelloni/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/brunobelloni/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/DuelBeginArenaEvent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
@@ -67,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/Event.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.8.8-R0.1-SNAPSHOT/spigot-api-1.8.8-R0.1-20160221.082514-43.jar!/org/bukkit/plugin/java/JavaPlugin.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+            <state relative-caret-position="-3961">
+              <caret line="50" column="29" lean-forward="true" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -80,7 +75,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -171,6 +166,7 @@
         <option value="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/PlayerAcceptInviteArenaEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/DuelEndArenaEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/DuelBeginArenaEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/brunobelloni/Main.java" />
       </list>
     </option>
   </component>
@@ -239,16 +235,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="brunobelloni" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="arena-spigot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="arena-spigot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="brunobelloni" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="event" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -361,12 +347,20 @@
       <workItem from="1571231506222" duration="1725000" />
       <workItem from="1571233453282" duration="665000" />
       <workItem from="1571335568591" duration="1386000" />
-      <workItem from="1571337720521" duration="450000" />
+      <workItem from="1571337720521" duration="493000" />
     </task>
+    <task id="LOCAL-00001" summary="api events">
+      <created>1571338183952</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1571338183952</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1836000" />
+    <option name="totallyTimeSpent" value="1879000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1608" y="-79" width="1616" height="916" extended-state="6" />
@@ -438,6 +432,10 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="api events" />
+    <option name="LAST_COMMIT_MESSAGE" value="api events" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/api/Arena.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -457,20 +455,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1240#1241#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -526,13 +510,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/DuelEndArenaEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/DuelBeginArenaEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -540,6 +517,34 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/api/event/DuelEndArenaEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/brunobelloni/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.8.8-R0.1-SNAPSHOT/spigot-api-1.8.8-R0.1-20160221.082514-43.jar!/org/bukkit/plugin/java/JavaPlugin.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3961">
+          <caret line="50" column="29" lean-forward="true" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
         </state>
       </provider>
     </entry>

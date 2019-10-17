@@ -9,7 +9,6 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.pluginManager.registerEvents(new Event(), this);
     }
 
     @Override
