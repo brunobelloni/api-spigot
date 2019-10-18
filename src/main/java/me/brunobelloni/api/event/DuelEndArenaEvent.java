@@ -23,8 +23,11 @@ public class DuelEndArenaEvent extends Event {
         return loser;
     }
 
-    @Override
     public HandlerList getHandlers() {
-        return null;
+        return handlers;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 }

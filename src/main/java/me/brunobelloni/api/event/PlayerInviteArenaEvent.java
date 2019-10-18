@@ -8,6 +8,7 @@ public class PlayerInviteArenaEvent extends Event {
 
     private final Player host;
     private final Player invited;
+    private static final HandlerList handlers = new HandlerList();
 
     public PlayerInviteArenaEvent(Player host, Player invited) {
         this.host = host;
@@ -22,8 +23,11 @@ public class PlayerInviteArenaEvent extends Event {
         return invited;
     }
 
-    @Override
     public HandlerList getHandlers() {
-        return null;
+        return handlers;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 }

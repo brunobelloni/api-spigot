@@ -23,8 +23,11 @@ public class PlayerDenyInviteArenaEvent extends Event {
         return whoDenied;
     }
 
-    @Override
     public HandlerList getHandlers() {
-        return null;
+        return handlers;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 }

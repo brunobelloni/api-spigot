@@ -12,7 +12,7 @@
             <list>
               <option value="clean" />
               <option value="install" />
-              <option value="-Ddir=$USER_HOME$/Downloads/servidor/plugins/" />
+              <option value="-Ddir=C:\Users\bruno\Documents\server\plugins" />
             </list>
           </option>
           <option name="pomFileName" />
