@@ -1,45 +1,37 @@
 package me.brunobelloni;
 
-import me.brunobelloni.api.ArenaCommand;
 import me.brunobelloni.api.EventCaller;
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandMap;
+import me.brunobelloni.api.commands.command.CommandManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.lang.reflect.Field;
-
 public class Main extends JavaPlugin {
 
-    private Field bukkitCommandMap;
-    private CommandMap commandMap;
-    private PluginManager pluginManager = this.getServer().getPluginManager();
+    private final PluginManager pluginManager = this.getServer().getPluginManager();
+
+    private final CommandManager commandManager = new CommandManager(this); //where plugin is a plugin instance
 
     @Override
     public void onEnable() {
-        registraEventos();
+        // Automatically finds all classes that implements the CommandListener.class and registers their commands
+        commandManager.registerCommands();
+        //registers a generated help topic to bukkit
+        commandManager.registerHelp();
+        //so the /help PluginName displays our plugin's registered commands
 
-        try {
-            registraComandos();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        registraEventos();
     }
 
     @Override
     public void onDisable() {
     }
 
+    /**
+     * Registra os Eventos que precisam ser escutados pelo plugin
+     */
     private void registraEventos() {
         pluginManager.registerEvents(new EventCaller(this), this);
         pluginManager.registerEvents(new ApiEventHandler(this), this);
     }
 
-    private void registraComandos() throws NoSuchFieldException, IllegalAccessException {
-        this.bukkitCommandMap = Bukkit.getServer().getClass().getDeclaredField("commandMap");
-        this.bukkitCommandMap.setAccessible(true);
-        this.commandMap = (CommandMap) this.bukkitCommandMap.get(Bukkit.getServer());
-
-        this.commandMap.register("arena", new ArenaCommand("arena"));
-    }
 }
