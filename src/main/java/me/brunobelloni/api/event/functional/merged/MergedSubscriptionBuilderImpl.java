@@ -12,7 +12,11 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * @author lucko
+ */
 class MergedSubscriptionBuilderImpl<T> implements MergedSubscriptionBuilder<T> {
+
     final TypeToken<T> handledClass;
     final Map<Class<? extends Event>, MergedHandlerMapping<T, ? extends Event>> mappings = new HashMap<>();
     final List<Predicate<T>> filters = new ArrayList<>();
@@ -25,12 +29,10 @@ class MergedSubscriptionBuilderImpl<T> implements MergedSubscriptionBuilder<T> {
         this.handledClass = handledClass;
     }
 
-
     @Override
     public <E extends Event> MergedSubscriptionBuilder<T> bindEvent(Class<E> eventClass, Function<E, T> function) {
         return bindEvent(eventClass, EventPriority.NORMAL, function);
     }
-
 
     @Override
     public <E extends Event> MergedSubscriptionBuilder<T> bindEvent(Class<E> eventClass, EventPriority priority, Function<E, T> function) {
@@ -41,7 +43,6 @@ class MergedSubscriptionBuilderImpl<T> implements MergedSubscriptionBuilder<T> {
         this.mappings.put(eventClass, new MergedHandlerMapping<>(priority, function));
         return this;
     }
-
 
     @Override
     public MergedSubscriptionBuilder<T> expireIf(BiPredicate<MergedSubscription<T>, T> predicate, ExpiryTestStage... testPoints) {
@@ -65,7 +66,6 @@ class MergedSubscriptionBuilderImpl<T> implements MergedSubscriptionBuilder<T> {
         return this;
     }
 
-
     @Override
     public MergedSubscriptionBuilder<T> filter(Predicate<T> predicate) {
         Objects.requireNonNull(predicate, "predicate");
@@ -73,14 +73,12 @@ class MergedSubscriptionBuilderImpl<T> implements MergedSubscriptionBuilder<T> {
         return this;
     }
 
-
     @Override
     public MergedSubscriptionBuilder<T> exceptionConsumer(BiConsumer<Event, Throwable> exceptionConsumer) {
         Objects.requireNonNull(exceptionConsumer, "exceptionConsumer");
         this.exceptionConsumer = exceptionConsumer;
         return this;
     }
-
 
     @Override
     public MergedHandlerList<T> handlers() {
@@ -90,5 +88,4 @@ class MergedSubscriptionBuilderImpl<T> implements MergedSubscriptionBuilder<T> {
 
         return new MergedHandlerListImpl<>(this);
     }
-
 }

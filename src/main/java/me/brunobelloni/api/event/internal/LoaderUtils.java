@@ -6,6 +6,7 @@ import org.bukkit.plugin.Plugin;
 
 /**
  * Provides the instance which loaded the helper classes into the server
+ * @author lucko
  */
 public final class LoaderUtils {
 

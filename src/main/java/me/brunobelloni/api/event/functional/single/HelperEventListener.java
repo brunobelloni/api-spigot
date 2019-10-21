@@ -17,7 +17,11 @@ import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
+/**
+ * @author lucko
+ */
 class HelperEventListener<T extends Event> implements SingleSubscription<T>, EventExecutor, Listener {
+
     private final Class<T> eventClass;
     private final EventPriority priority;
 

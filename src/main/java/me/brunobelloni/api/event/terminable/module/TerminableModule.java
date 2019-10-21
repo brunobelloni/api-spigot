@@ -6,6 +6,7 @@ import me.brunobelloni.api.event.terminable.TerminableConsumer;
 /**
  * A terminable module is a class which manipulates and constructs a number
  * of {@link Terminable}s.
+ * @author lucko
  */
 public interface TerminableModule {
 

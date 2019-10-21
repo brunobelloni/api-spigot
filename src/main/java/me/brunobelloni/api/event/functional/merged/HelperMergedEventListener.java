@@ -21,7 +21,11 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * @author lucko
+ */
 class HelperMergedEventListener<T> implements MergedSubscription<T>, EventExecutor, Listener {
+
     private final TypeToken<T> handledClass;
     private final Map<Class<? extends Event>, MergedHandlerMapping<T, ? extends Event>> mappings;
 

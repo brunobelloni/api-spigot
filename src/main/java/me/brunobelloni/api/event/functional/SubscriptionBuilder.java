@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 /**
  * Abstract {@link Subscription} builder.
  *
+ * @author lucko
  * @param <T> the handled / event type
  */
 public interface SubscriptionBuilder<T> {
@@ -55,5 +56,4 @@ public interface SubscriptionBuilder<T> {
      * @return the builder instance
      */
     SubscriptionBuilder<T> filter(Predicate<T> predicate);
-
 }

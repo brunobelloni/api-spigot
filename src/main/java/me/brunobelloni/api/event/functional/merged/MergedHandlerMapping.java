@@ -5,7 +5,11 @@ import org.bukkit.event.EventPriority;
 
 import java.util.function.Function;
 
+/**
+ * @author lucko
+ */
 class MergedHandlerMapping<T, E extends Event> {
+
     private final EventPriority priority;
     private final Function<Object, T> function;
 

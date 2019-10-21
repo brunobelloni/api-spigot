@@ -6,6 +6,7 @@ import org.bukkit.event.Event;
 /**
  * Represents a subscription to a single given event.
  *
+ * @author lucko
  * @param <T> the event type
  */
 public interface SingleSubscription<T extends Event> extends Subscription {

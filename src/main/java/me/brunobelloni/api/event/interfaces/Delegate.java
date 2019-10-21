@@ -3,6 +3,7 @@ package me.brunobelloni.api.event.interfaces;
 /**
  * Represents a class which delegates calls to a different object.
  *
+ * @author lucko
  * @param <T> the delegate type
  */
 public interface Delegate<T> {

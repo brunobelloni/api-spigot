@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
+/**
+ * @author lucko
+ */
 class SingleHandlerListImpl<T extends Event> implements SingleHandlerList<T> {
     private final SingleSubscriptionBuilderImpl<T> builder;
     private final List<BiConsumer<SingleSubscription<T>, ? super T>> handlers = new ArrayList<>(1);
@@ -17,14 +20,12 @@ class SingleHandlerListImpl<T extends Event> implements SingleHandlerList<T> {
         this.builder = builder;
     }
 
-
     @Override
     public SingleHandlerList<T> biConsumer(BiConsumer<SingleSubscription<T>, ? super T> handler) {
         Objects.requireNonNull(handler, "handler");
         this.handlers.add(handler);
         return this;
     }
-
 
     @Override
     public SingleSubscription<T> register() {

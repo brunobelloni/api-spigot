@@ -7,6 +7,7 @@ import java.util.Set;
 /**
  * Represents a subscription to a set of events.
  *
+ * @author lucko
  * @param <T> the handled type
  */
 public interface MergedSubscription<T> extends Subscription {

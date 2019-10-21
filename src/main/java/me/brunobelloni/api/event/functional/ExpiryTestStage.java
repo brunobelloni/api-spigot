@@ -3,6 +3,8 @@ package me.brunobelloni.api.event.functional;
 /**
  * Represents when a expiry predicate should be tested relative to the handling
  * of the event.
+ *
+ * @author lucko
  */
 public enum ExpiryTestStage {
 
@@ -20,5 +22,4 @@ public enum ExpiryTestStage {
      * The expiry predicate should be tested after the event has been handled
      */
     POST_HANDLE
-
 }

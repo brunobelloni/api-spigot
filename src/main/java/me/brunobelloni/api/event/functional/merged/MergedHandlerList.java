@@ -8,15 +8,16 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+/**
+ * @author lucko
+ */
 public interface MergedHandlerList<T> extends FunctionalHandlerList<T, MergedSubscription<T>> {
-
 
     @Override
     default MergedHandlerList<T> consumer(Consumer<? super T> handler) {
         Objects.requireNonNull(handler, "handler");
         return biConsumer(Delegates.consumerToBiConsumerSecond(handler));
     }
-
 
     @Override
     MergedHandlerList<T> biConsumer(BiConsumer<MergedSubscription<T>, ? super T> handler);

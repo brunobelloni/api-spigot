@@ -5,6 +5,7 @@ import me.brunobelloni.api.event.terminable.module.TerminableModule;
 /**
  * Accepts {@link AutoCloseable}s (and by inheritance {@link Terminable}s),
  * as well as {@link TerminableModule}s.
+ * @author lucko
  */
 @FunctionalInterface
 public interface TerminableConsumer {

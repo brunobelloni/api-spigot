@@ -10,6 +10,8 @@ import java.util.function.Predicate;
 
 /**
  * Defines standard event predicates for use in functional event handlers.
+ *
+ * @author lucko
  */
 @SuppressWarnings("unchecked")
 public final class EventFilters {

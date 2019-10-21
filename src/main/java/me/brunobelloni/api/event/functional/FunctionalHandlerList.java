@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 /**
  * A functional builder which accumulates event handlers
  *
+ * @author lucko
  * @param <T> the handled type
  * @param <R> the resultant subscription type
  */
@@ -34,5 +35,4 @@ public interface FunctionalHandlerList<T, R> {
      * @throws IllegalStateException if no handlers have been registered
      */
     R register();
-
 }

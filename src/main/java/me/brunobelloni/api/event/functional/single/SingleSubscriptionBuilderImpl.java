@@ -12,7 +12,11 @@ import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
+/**
+ * @author lucko
+ */
 class SingleSubscriptionBuilderImpl<T extends Event> implements SingleSubscriptionBuilder<T> {
+
     final Class<T> eventClass;
     final EventPriority priority;
     final List<Predicate<T>> filters = new ArrayList<>(3);
@@ -25,7 +29,6 @@ class SingleSubscriptionBuilderImpl<T extends Event> implements SingleSubscripti
         this.eventClass = eventClass;
         this.priority = priority;
     }
-
 
     @Override
     public SingleSubscriptionBuilder<T> expireIf(BiPredicate<SingleSubscription<T>, T> predicate, ExpiryTestStage... testPoints) {
@@ -49,14 +52,12 @@ class SingleSubscriptionBuilderImpl<T extends Event> implements SingleSubscripti
         return this;
     }
 
-
     @Override
     public SingleSubscriptionBuilder<T> filter(Predicate<T> predicate) {
         Objects.requireNonNull(predicate, "predicate");
         this.filters.add(predicate);
         return this;
     }
-
 
     @Override
     public SingleSubscriptionBuilder<T> exceptionConsumer(BiConsumer<? super T, Throwable> exceptionConsumer) {
@@ -65,10 +66,8 @@ class SingleSubscriptionBuilderImpl<T extends Event> implements SingleSubscripti
         return this;
     }
 
-
     @Override
     public SingleHandlerList<T> handlers() {
         return new SingleHandlerListImpl<>(this);
     }
-
 }

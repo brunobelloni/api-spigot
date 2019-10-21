@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
+/**
+ * @author lucko
+ */
 class MergedHandlerListImpl<T> implements MergedHandlerList<T> {
+
     private final MergedSubscriptionBuilderImpl<T> builder;
     private final List<BiConsumer<MergedSubscription<T>, ? super T>> handlers = new ArrayList<>(1);
 
@@ -16,14 +20,12 @@ class MergedHandlerListImpl<T> implements MergedHandlerList<T> {
         this.builder = builder;
     }
 
-
     @Override
     public MergedHandlerList<T> biConsumer(BiConsumer<MergedSubscription<T>, ? super T> handler) {
         Objects.requireNonNull(handler, "handler");
         this.handlers.add(handler);
         return this;
     }
-
 
     @Override
     public MergedSubscription<T> register() {

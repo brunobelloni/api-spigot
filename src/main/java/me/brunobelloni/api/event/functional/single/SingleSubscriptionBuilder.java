@@ -18,6 +18,7 @@ import java.util.function.Predicate;
 /**
  * Functional builder for {@link SingleSubscription}s.
  *
+ * @author lucko
  * @param <T> the event type
  */
 public interface SingleSubscriptionBuilder<T extends Event> extends SubscriptionBuilder<T> {
@@ -30,7 +31,6 @@ public interface SingleSubscriptionBuilder<T extends Event> extends Subscription
      * @return a {@link SingleSubscriptionBuilder} to construct the event handler
      * @throws NullPointerException if eventClass is null
      */
-
     static <T extends Event> SingleSubscriptionBuilder<T> newBuilder(Class<T> eventClass) {
         return newBuilder(eventClass, EventPriority.NORMAL);
     }
@@ -44,14 +44,11 @@ public interface SingleSubscriptionBuilder<T extends Event> extends Subscription
      * @return a {@link SingleSubscriptionBuilder} to construct the event handler
      * @throws NullPointerException if eventClass or priority is null
      */
-
     static <T extends Event> SingleSubscriptionBuilder<T> newBuilder(Class<T> eventClass, EventPriority priority) {
         Objects.requireNonNull(eventClass, "eventClass");
         Objects.requireNonNull(priority, "priority");
         return new SingleSubscriptionBuilderImpl<>(eventClass, priority);
     }
-
-    // override return type - we return SingleSubscriptionBuilder, not SubscriptionBuilder
 
     @Override
     default SingleSubscriptionBuilder<T> expireIf(Predicate<T> predicate) {
@@ -100,7 +97,6 @@ public interface SingleSubscriptionBuilder<T extends Event> extends Subscription
      *
      * @return the handler list
      */
-
     SingleHandlerList<T> handlers();
 
     /**
@@ -125,5 +121,4 @@ public interface SingleSubscriptionBuilder<T extends Event> extends Subscription
     default SingleSubscription<T> biHandler(BiConsumer<SingleSubscription<T>, ? super T> handler) {
         return handlers().biConsumer(handler).register();
     }
-
 }

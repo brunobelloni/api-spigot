@@ -8,6 +8,7 @@ import org.bukkit.event.EventPriority;
 
 /**
  * A functional event listening utility.
+ * @author lucko
  */
 public final class Events {
 

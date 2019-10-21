@@ -4,6 +4,7 @@ import me.brunobelloni.api.event.terminable.Terminable;
 
 /**
  * Represents a subscription to a given (set of) event(s).
+ * @author lucko
  */
 public interface Subscription extends Terminable {
 

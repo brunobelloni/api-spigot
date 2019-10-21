@@ -3,6 +3,7 @@ package me.brunobelloni.api.event.terminable;
 
 /**
  * An extension of {@link AutoCloseable}.
+ * @author lucko
  */
 @FunctionalInterface
 public interface Terminable extends AutoCloseable {
