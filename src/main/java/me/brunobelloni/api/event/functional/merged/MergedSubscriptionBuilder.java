@@ -5,7 +5,7 @@ import com.google.common.reflect.TypeToken;
 import me.brunobelloni.api.event.MergedSubscription;
 import me.brunobelloni.api.event.functional.ExpiryTestStage;
 import me.brunobelloni.api.event.functional.SubscriptionBuilder;
-import me.brunobelloni.api.event.utils.Delegates;
+import me.brunobelloni.api.utils.Delegates;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 

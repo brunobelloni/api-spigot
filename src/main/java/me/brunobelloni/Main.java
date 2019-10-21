@@ -12,24 +12,20 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.TimeUnit;
 
 public class Main extends JavaPlugin {
 
-    private final PluginManager pluginManager = this.getServer().getPluginManager();
-
-    private final CommandManager commandManager = new CommandManager(this); //where plugin is a plugin instance
+    private final CommandManager commandManager = new CommandManager(this);
 
     @Override
     public void onEnable() {
-        // Automatically finds all classes that implements the CommandListener.class and registers their commands
         commandManager.registerCommands();
-        //registers a generated help topic to bukkit
         commandManager.registerHelp();
-        //so the /help PluginName displays our plugin's registered commands
+
+        eventRegisterTest();
     }
 
     @Override

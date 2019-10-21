@@ -1,4 +1,4 @@
-package me.brunobelloni.api.event.utils;
+package me.brunobelloni.api.utils;
 
 
 import me.brunobelloni.api.event.interfaces.Delegate;

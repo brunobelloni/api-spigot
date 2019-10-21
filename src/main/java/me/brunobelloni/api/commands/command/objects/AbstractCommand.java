@@ -1,7 +1,7 @@
 package me.brunobelloni.api.commands.command.objects;
 
 import me.brunobelloni.api.commands.command.CommandManager;
-import me.brunobelloni.api.commands.util.StringUtil;
+import me.brunobelloni.api.utils.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

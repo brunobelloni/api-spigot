@@ -21,6 +21,7 @@ import me.brunobelloni.api.commands.command.objects.CommandInfo;
  * flagDesc: (String[], default: {}) The description of what each flag does (see flags example below)
  */
 public class ApiCommandHandler implements CommandListener {
+
     /**
      * command is the only required field for the annotation
      * <p>

@@ -1,7 +1,7 @@
 package me.brunobelloni.api.event.functional.single;
 
-import me.brunobelloni.api.event.Helper;
 import me.brunobelloni.api.event.SingleSubscription;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
@@ -58,7 +58,8 @@ class HelperEventListener<T extends Event> implements SingleSubscription<T>, Eve
     }
 
     void register(Plugin plugin) {
-        Helper.plugins().registerEvent(this.eventClass, this, this.priority, this, plugin, false);
+        Bukkit.getServer().getPluginManager()
+                .registerEvent(this.eventClass, this, this.priority, this, plugin, false);
     }
 
     @Override

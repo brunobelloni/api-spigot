@@ -2,8 +2,8 @@ package me.brunobelloni.api.event.functional.merged;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.reflect.TypeToken;
-import me.brunobelloni.api.event.Helper;
 import me.brunobelloni.api.event.MergedSubscription;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -63,7 +63,8 @@ class HelperMergedEventListener<T> implements MergedSubscription<T>, EventExecut
 
     void register(Plugin plugin) {
         for (Map.Entry<Class<? extends Event>, MergedHandlerMapping<T, ? extends Event>> ent : this.mappings.entrySet()) {
-            Helper.plugins().registerEvent(ent.getKey(), this, ent.getValue().getPriority(), this, plugin, false);
+            Bukkit.getServer().getPluginManager()
+                    .registerEvent(ent.getKey(), this, ent.getValue().getPriority(), this, plugin, false);
         }
     }
 
