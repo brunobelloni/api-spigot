@@ -1,6 +1,7 @@
 package me.brunobelloni;
 
 import me.brunobelloni.api.commands.command.CommandManager;
+import me.brunobelloni.snowball.eventos.InGame;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -14,6 +15,8 @@ public class Main extends JavaPlugin {
         commandManager.registerHelp();
 
         apiEventHandler.implement();
+
+        new InGame(this).execute();
     }
 
     @Override
