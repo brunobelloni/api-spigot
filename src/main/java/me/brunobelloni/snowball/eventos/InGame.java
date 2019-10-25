@@ -13,6 +13,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import static me.brunobelloni.snowball.Utils.Cooldown.putCooldown;
 import static me.brunobelloni.snowball.Utils.Cooldown.removeCooldown;
@@ -21,13 +22,24 @@ import static org.bukkit.Sound.NOTE_PLING;
 
 public class InGame implements AbstractGame {
 
-    private static final Long cooldownTime = 5L;
-    private static final ItemStack snowballItem = new ItemBuilder(Material.SNOW_BALL).setDisplayName(ChatColor.GREEN + "Snowball").build();
-    private static final ItemStack cooldownItem = new ItemBuilder(Material.SLIME_BALL).setDisplayName(ChatColor.RED + "Espere o tempo de recarga!").build();
+    private static Long cooldownTime;
     private static JavaPlugin plugin;
+    private static ItemStack snowballItem;
+    private static ItemStack cooldownItem;
+    private static BukkitScheduler scheduler;
 
     public InGame(JavaPlugin plugin) {
+        cooldownTime = 5L;
         InGame.plugin = plugin;
+        scheduler = plugin.getServer().getScheduler();
+
+        snowballItem = new ItemBuilder(Material.SNOW_BALL)
+                .setDisplayName(ChatColor.GREEN + "Snowball")
+                .build();
+
+        cooldownItem = new ItemBuilder(Material.SLIME_BALL)
+                .setDisplayName(ChatColor.RED + "Espere o tempo de recarga!")
+                .build();
     }
 
     @Override
@@ -42,7 +54,7 @@ public class InGame implements AbstractGame {
                 })
                 .handler(e -> {
                     e.setCancelled(true);
-                    e.getPlayer().sendMessage(ChatColor.RED + "Você não pode droppar esse item!");
+                    e.getPlayer().sendMessage(ChatColor.RED + "Você não pode dropar esse item!");
                 });
 
         /**
@@ -57,8 +69,7 @@ public class InGame implements AbstractGame {
                    /**
                     * Adiciona o item de cooldown (async) para o player
                     */
-                   plugin.getServer().getScheduler()
-                           .runTaskAsynchronously(plugin, () -> {
+                   scheduler.runTaskAsynchronously(plugin, () -> {
                                shooter.setItemInHand(cooldownItem);
                            });
 
@@ -70,8 +81,7 @@ public class InGame implements AbstractGame {
                    /**
                     * Agenda uma Tarefa para remove o cooldown do player depois de 5 segundos.
                     */
-                   plugin.getServer().getScheduler()
-                           .runTaskLaterAsynchronously(plugin, () -> {
+                   scheduler.runTaskLaterAsynchronously(plugin, () -> {
                                removeCooldown(shooter);
                                shooter.getInventory().removeItem(cooldownItem);
                                shooter.getInventory().setItem(0, snowballItem);
