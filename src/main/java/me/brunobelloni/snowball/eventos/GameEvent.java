@@ -1,6 +1,6 @@
 package me.brunobelloni.snowball.eventos;
 
-public interface AbstractGame {
+public interface GameEvent {
 
     public void execute();
 

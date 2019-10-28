@@ -20,7 +20,7 @@ import static me.brunobelloni.snowball.Utils.Cooldown.removeCooldown;
 import static org.bukkit.Sound.ENDERMAN_TELEPORT;
 import static org.bukkit.Sound.NOTE_PLING;
 
-public class InGame implements AbstractGame {
+public class InGame implements GameEvent {
 
     private static Long cooldownTime;
     private static JavaPlugin plugin;
