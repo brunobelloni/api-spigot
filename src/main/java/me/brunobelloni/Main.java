@@ -6,6 +6,8 @@ import me.brunobelloni.api.commands.command.CommandManager;
 import me.brunobelloni.api.event.Events;
 import me.brunobelloni.snowball.eventos.InGame;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -33,6 +35,13 @@ public class Main extends JavaPlugin {
         InGame inGame = new InGame(this);
         inGame.execute();
 
+        Events.subscribe(BlockPlaceEvent.class)
+                .filter(e -> !e.getPlayer().isOp())
+                .handler(e -> e.setCancelled(true));
+
+        Events.subscribe(BlockBreakEvent.class)
+                .filter(e -> !e.getPlayer().isOp())
+                .handler(e -> e.setCancelled(true));
 
         Events.subscribe(PlayerJoinEvent.class)
                 .handler(e -> {

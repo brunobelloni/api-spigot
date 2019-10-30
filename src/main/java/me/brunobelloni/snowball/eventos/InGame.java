@@ -105,6 +105,7 @@ public class InGame {
          * Bloqueia comandos na arena
          */
         Events.subscribe(PlayerCommandPreprocessEvent.class)
+                .filter(e -> playerIsInSnowball(e.getPlayer()))
                 .handler(e -> {
                     String cmd = e.getMessage().substring(1);
 
