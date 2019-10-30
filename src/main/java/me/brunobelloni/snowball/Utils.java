@@ -31,6 +31,10 @@ public class Utils {
             player.teleport(getSnowballLocation());
             player.getInventory().addItem(snowballItem);
             player.sendMessage(ChatColor.GREEN + "Você entrou no SNOWBALL!");
+
+//            ActionBar actionBar = new ActionBar("Hello world");
+//            actionBar.send(player);
+
             playersInSnowball.add(player.getUniqueId());
         }
 

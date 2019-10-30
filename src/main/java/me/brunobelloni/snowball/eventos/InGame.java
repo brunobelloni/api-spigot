@@ -39,6 +39,7 @@ public class InGame {
          * Bloqueia que o player drope o item
          */
         Events.subscribe(PlayerDropItemEvent.class)
+                .filter(e -> playerIsInSnowball(e.getPlayer()))
                 .filter(e -> {
                     ItemStack material = e.getItemDrop().getItemStack();
                     return material.equals(cooldownItem) || material.equals(snowballItem);
@@ -54,6 +55,7 @@ public class InGame {
         Events.subscribe(ProjectileLaunchEvent.class)
                 .filter(e -> e.getEntity().getShooter() instanceof Player)
                 .filter(e -> e.getEntity() instanceof Snowball)
+                .filter(e -> playerIsInSnowball((Player) e.getEntity()))
                 .handler(e -> {
                     Player shooter = (Player) e.getEntity().getShooter();
 
@@ -85,6 +87,7 @@ public class InGame {
                 .filter(e -> e.getEntity() instanceof Player)
                 .filter(e -> e.getDamager() instanceof Snowball)
                 .filter(e -> ((Snowball) e.getDamager()).getShooter() instanceof Player)
+                .filter(e -> playerIsInSnowball((Player) e.getEntity()))
                 .handler(e -> {
                     Player shooter = (Player) ((Snowball) e.getDamager()).getShooter();
                     Player hitted = (Player) e.getEntity();
@@ -138,8 +141,6 @@ public class InGame {
          */
         Events.merge(PlayerEvent.class, PlayerQuitEvent.class, PlayerKickEvent.class)
                 .filter(e -> playerIsInSnowball(e.getPlayer()))
-                .handler(e -> {
-                    removePlayerToSnowball(e.getPlayer());
-                });
+                .handler(e -> removePlayerToSnowball(e.getPlayer()));
     }
 }
