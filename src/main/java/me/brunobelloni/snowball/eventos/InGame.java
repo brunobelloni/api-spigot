@@ -1,48 +1,39 @@
 package me.brunobelloni.snowball.eventos;
 
 import me.brunobelloni.api.event.Events;
-import me.brunobelloni.api.item.ItemBuilder;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import static me.brunobelloni.snowball.Utils.Cooldown.putCooldown;
 import static me.brunobelloni.snowball.Utils.Cooldown.removeCooldown;
+import static me.brunobelloni.snowball.Utils.Snowball.playerIsInSnowball;
+import static me.brunobelloni.snowball.Utils.Snowball.removePlayerToSnowball;
+import static me.brunobelloni.snowball.Utils.SnowballItens.cooldownItem;
+import static me.brunobelloni.snowball.Utils.SnowballItens.snowballItem;
+import static me.brunobelloni.snowball.Utils.SnowballLocation.getSnowballLocation;
 import static org.bukkit.Sound.ENDERMAN_TELEPORT;
 import static org.bukkit.Sound.NOTE_PLING;
 
-public class InGame implements GameEvent {
+public class InGame {
 
     private static Long cooldownTime;
     private static JavaPlugin plugin;
-    private static ItemStack snowballItem;
-    private static ItemStack cooldownItem;
     private static BukkitScheduler scheduler;
 
     public InGame(JavaPlugin plugin) {
-        cooldownTime = 5L;
+        cooldownTime = 10L;
         InGame.plugin = plugin;
         scheduler = plugin.getServer().getScheduler();
-
-        snowballItem = new ItemBuilder(Material.SNOW_BALL)
-                .setDisplayName(ChatColor.GREEN + "Snowball")
-                .build();
-
-        cooldownItem = new ItemBuilder(Material.SLIME_BALL)
-                .setDisplayName(ChatColor.RED + "Espere o tempo de recarga!")
-                .build();
     }
 
-    @Override
     public void execute() {
         /**
          * Bloqueia que o player drope o item
@@ -61,59 +52,94 @@ public class InGame implements GameEvent {
          * Evento para tratar o cooldown da Snowball
          */
         Events.subscribe(ProjectileLaunchEvent.class)
-               .filter(e -> e.getEntity().getShooter() instanceof Player)
-               .filter(e -> e.getEntity() instanceof Snowball)
-               .handler(e -> {
-                   Player shooter = (Player) e.getEntity().getShooter();
+                .filter(e -> e.getEntity().getShooter() instanceof Player)
+                .filter(e -> e.getEntity() instanceof Snowball)
+                .handler(e -> {
+                    Player shooter = (Player) e.getEntity().getShooter();
 
-                   /**
-                    * Adiciona o item de cooldown (async) para o player
-                    */
-                   scheduler.runTaskAsynchronously(plugin, () -> {
-                               shooter.setItemInHand(cooldownItem);
-                           });
+                    /**
+                     * Adiciona o item de cooldown (async) para o player
+                     */
+                    scheduler.runTaskAsynchronously(plugin, () -> shooter.setItemInHand(cooldownItem));
 
-                   /**
-                    * Bota um cooldown de 5 segundos no player
-                    */
-                   putCooldown(shooter, cooldownTime);
+                    /**
+                     * Bota um cooldown de 5 segundos no player
+                     */
+                    putCooldown(shooter, cooldownTime);
 
-                   /**
-                    * Agenda uma Tarefa para remove o cooldown do player depois de 5 segundos.
-                    */
-                   scheduler.runTaskLaterAsynchronously(plugin, () -> {
-                               removeCooldown(shooter);
-                               shooter.getInventory().removeItem(cooldownItem);
-                               shooter.getInventory().setItem(0, snowballItem);
-                               shooter.playSound(shooter.getLocation(), NOTE_PLING, 5.0F, 1.0F);
-                           }, cooldownTime * 20L);
-               });
+                    /**
+                     * Agenda uma Tarefa para remove o cooldown do player depois de 5 segundos.
+                     */
+                    scheduler.runTaskLaterAsynchronously(plugin, () -> {
+                        removeCooldown(shooter);
+                        shooter.getInventory().removeItem(cooldownItem);
+                        shooter.getInventory().setItem(0, snowballItem);
+                        shooter.playSound(shooter.getLocation(), NOTE_PLING, 5.0F, 1.0F);
+                    }, cooldownTime * 20L);
+                });
 
         /**
          * Evento para tratar quando um player (shooter) atinge outro player (hitted)
          */
         Events.subscribe(EntityDamageByEntityEvent.class)
-               .filter(e -> e.getEntity() instanceof Player)
-               .filter(e -> e.getDamager() instanceof Snowball)
-               .filter(e -> ((Snowball) e.getDamager()).getShooter() instanceof Player)
-               .handler(e -> {
-                   Player shooter = (Player) ((Snowball) e.getDamager()).getShooter();
-                   Player hitted = (Player) e.getEntity();
+                .filter(e -> e.getEntity() instanceof Player)
+                .filter(e -> e.getDamager() instanceof Snowball)
+                .filter(e -> ((Snowball) e.getDamager()).getShooter() instanceof Player)
+                .handler(e -> {
+                    Player shooter = (Player) ((Snowball) e.getDamager()).getShooter();
+                    Player hitted = (Player) e.getEntity();
 
-                   Location hittedLocation = hitted.getLocation();
-                   Location shooterLocation = shooter.getLocation();
+                    if (playerIsInSnowball(shooter) && playerIsInSnowball(hitted)) {
+                        hitted.damage(20, shooter);
+                        shooter.setLevel(shooter.getLevel() + 1);
 
-                   /**
-                    * Troca a posição dos jogadores
-                    */
-                   hitted.teleport(shooterLocation);
-                   shooter.teleport(hittedLocation);
+                        hitted.playSound(hitted.getLocation(), ENDERMAN_TELEPORT, 5.0F, 1.0F);
+                        shooter.playSound(shooter.getLocation(), ENDERMAN_TELEPORT, 5.0F, 1.0F);
+                    }
+                });
 
-                   /**
-                    * Reproduz {@link Sound.ENDERMAN_TELEPORT}
-                    */
-                   hitted.playSound(hitted.getLocation(), ENDERMAN_TELEPORT, 5.0F, 1.0F);
-                   shooter.playSound(shooter.getLocation(), ENDERMAN_TELEPORT, 5.0F, 1.0F);
-               });
+        /**
+         * Bloqueia comandos na arena
+         */
+        Events.subscribe(PlayerCommandPreprocessEvent.class)
+                .handler(e -> {
+                    String cmd = e.getMessage().substring(1);
+
+                    if (!cmd.startsWith("snowball")) {
+                        e.getPlayer().sendMessage(ChatColor.RED + "Digite /snowball para sair!");
+                        e.setCancelled(true);
+                    }
+                });
+
+        /**
+         * Altera o spawn location quando o player estiver no Snowball
+         */
+        Events.subscribe(PlayerRespawnEvent.class)
+                .filter(e -> playerIsInSnowball(e.getPlayer()))
+                .handler(e -> {
+                    e.setRespawnLocation(getSnowballLocation());
+                });
+
+        /**
+         * Mantem level quando morre
+         * Auto-respawn
+         */
+        Events.subscribe(PlayerDeathEvent.class)
+                .filter(e -> playerIsInSnowball(e.getEntity()))
+                .handler(e -> {
+                    e.setKeepLevel(true);
+                    e.setDeathMessage("");
+                    e.getKeepInventory();
+                    e.getEntity().spigot().respawn();
+                });
+
+        /**
+         * Remove o player da arena quando ele sair do servidor
+         */
+        Events.merge(PlayerEvent.class, PlayerQuitEvent.class, PlayerKickEvent.class)
+                .filter(e -> playerIsInSnowball(e.getPlayer()))
+                .handler(e -> {
+                    removePlayerToSnowball(e.getPlayer());
+                });
     }
 }
